@@ -19,7 +19,7 @@ class PlaceInput extends Component {
           onChangeText={this.placeNameChangedHandler}
           style={styles.placeInput}
         />
-        <Button title='ADD' style={styles.placeButton} onPress={() => this.props.placeSubmit(this.state.placeName)} />
+        <Button title='ADD' style={styles.placeButton} onPress={() => this.props.placeAdd(this.state.placeName)} />
       </View>
     );
   }

@@ -9,18 +9,18 @@ export default class App extends Component {
     places: []
   };
 
-  placeSubmitHandler = placeName => {
+  placeAddHandler = placeName => {
     if (placeName.trim() === "") return;
     this.setState(prevState => {
       return {
-        places: [...prevState.places, placeName]
+        places: [...prevState.places, { key: Math.random().toString(), value: placeName }]
       };
     });
   };
 
-  placeDeleteHandler = placeId => {
+  placeDeleteHandler = placeKey => {
     this.setState(prevState => {
-      const places = prevState.places.filter((place, i) => i !== placeId);
+      const places = prevState.places.filter(place => place.key !== placeKey);
       return { places: places };
     });
   };
@@ -28,7 +28,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <PlaceInput placeSubmit={this.placeSubmitHandler} />
+        <PlaceInput placeAdd={this.placeAddHandler} />
         <PlaceList places={this.state.places} onItemDeleted={this.placeDeleteHandler} />
       </View>
     );
