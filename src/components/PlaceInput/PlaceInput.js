@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Button, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet } from "react-native";
 
 class PlaceInput extends Component {
   state = {
@@ -7,19 +7,33 @@ class PlaceInput extends Component {
   };
 
   placeNameChangedHandler = val => {
-    this.setState({ placeName: val });
+    this.setState({
+      placeName: val
+    });
+  };
+
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
+      return;
+    }
+
+    this.props.onPlaceAdded(this.state.placeName);
   };
 
   render() {
     return (
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder='An awesome place'
+          placeholder="An awesome place"
           value={this.state.placeName}
           onChangeText={this.placeNameChangedHandler}
           style={styles.placeInput}
         />
-        <Button title='ADD' style={styles.placeButton} onPress={() => this.props.placeAdd(this.state.placeName)} />
+        <Button
+          title="Add"
+          style={styles.placeButton}
+          onPress={this.placeSubmitHandler}
+        />
       </View>
     );
   }
@@ -40,4 +54,5 @@ const styles = StyleSheet.create({
     width: "30%"
   }
 });
+
 export default PlaceInput;
